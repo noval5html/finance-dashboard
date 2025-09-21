@@ -1,9 +1,11 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import React from "react";
 
 import { SiGithub } from "@icons-pack/react-simple-icons";
 
 import { Button } from "@/components/ui/button";
+import { auth } from "@/lib/auth/auth";
 
 const TechBadge = ({ label }: { label: string }) => (
   <div className="rounded-full bg-zinc-50 px-4 py-2 text-sm text-zinc-600 transition-colors hover:bg-zinc-100">
@@ -11,7 +13,17 @@ const TechBadge = ({ label }: { label: string }) => (
   </div>
 );
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth.api.getSession({
+    headers: {
+      cookie: ""
+    }
+  });
+
+  if (session) {
+    redirect("/dashboard");
+  }
+
   const technologies = {
     core: ["Next.js 15", "TypeScript 5", "React 19", "Tailwind CSS 3"],
     ecosystem: ["Drizzle ORM", "React Query 5", "PostgreSQL", "Radix UI"],
@@ -43,7 +55,7 @@ export default function Home() {
 
             {/* Primary actions */}
             <div className="flex flex-col gap-4 pt-4 sm:flex-row">
-              <Link href="https://github.com/new?template_name=nextjs-template&template_owner=Its-Satyajit">
+              <Link href="/sign-in">
                 <Button className="w-full rounded-full bg-black px-8 text-white hover:bg-zinc-800 sm:w-auto">
                   Get started
                 </Button>

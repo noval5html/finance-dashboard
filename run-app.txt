@@ -1,0 +1,25 @@
+How to Run the Application
+
+   1. Using Docker (Recommended):
+
+   1    docker-compose up -d
+
+   2. Manual Setup:
+
+    1    # Install dependencies
+    2    npm install
+    3 
+    4    # Set up environment variables
+    5    cp .env.example .env
+    6    # Update .env with your configuration
+    7 
+    8    # Run database migrations
+    9    npm run db:generate
+   10    npm run db:migrate
+   11 
+   12    # Start development server
+   13    npm run dev
+
+  The application is now ready for use. Users can register, log in, and start managing their
+  personal finances with features for tracking transactions, assets, investments, and generating
+  financial reports.
