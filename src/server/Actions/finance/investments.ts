@@ -1,8 +1,9 @@
 import { db } from "@/server/db";
 import { investment } from "@/server/db/schemas";
-import { eq, and } from "drizzle-orm";
-import { auth } from "@/lib/auth";
+import { and, eq } from "drizzle-orm";
 import { z } from "zod";
+
+import { auth } from "@/lib/auth";
 
 const investmentSchema = z.object({
   name: z.string().min(1),
@@ -63,10 +64,13 @@ export async function POST(req: Request) {
     });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return new Response(JSON.stringify({ error: "Invalid input", details: error.errors }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      });
+      return new Response(
+        JSON.stringify({ error: "Invalid input", details: error.errors }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        },
+      );
     }
 
     console.error("Error creating investment:", error);
@@ -100,7 +104,12 @@ export async function PUT(req: Request) {
         purchaseDate: new Date(validatedData.purchaseDate),
         currentValue: validatedData.currentValue,
       })
-      .where(and(eq(investment.id, parseInt(id)), eq(investment.userId, session.user.id)))
+      .where(
+        and(
+          eq(investment.id, parseInt(id)),
+          eq(investment.userId, session.user.id),
+        ),
+      )
       .returning();
 
     if (updatedInvestment.length === 0) {
@@ -113,10 +122,13 @@ export async function PUT(req: Request) {
     });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return new Response(JSON.stringify({ error: "Invalid input", details: error.errors }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      });
+      return new Response(
+        JSON.stringify({ error: "Invalid input", details: error.errors }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        },
+      );
     }
 
     console.error("Error updating investment:", error);
@@ -140,7 +152,12 @@ export async function DELETE(req: Request) {
 
     const deletedInvestment = await db
       .delete(investment)
-      .where(and(eq(investment.id, parseInt(id)), eq(investment.userId, session.user.id)))
+      .where(
+        and(
+          eq(investment.id, parseInt(id)),
+          eq(investment.userId, session.user.id),
+        ),
+      )
       .returning();
 
     if (deletedInvestment.length === 0) {

@@ -5,6 +5,7 @@ import React from "react";
 import { SiGithub } from "@icons-pack/react-simple-icons";
 
 import { Button } from "@/components/ui/button";
+
 import { auth } from "@/lib/auth/auth";
 
 const TechBadge = ({ label }: { label: string }) => (
@@ -16,8 +17,8 @@ const TechBadge = ({ label }: { label: string }) => (
 export default async function Home() {
   const session = await auth.api.getSession({
     headers: {
-      cookie: ""
-    }
+      cookie: "",
+    },
   });
 
   if (session) {

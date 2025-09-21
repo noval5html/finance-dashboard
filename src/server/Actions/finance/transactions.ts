@@ -1,8 +1,9 @@
 import { db } from "@/server/db";
 import { transaction } from "@/server/db/schemas";
-import { eq, and } from "drizzle-orm";
-import { auth } from "@/lib/auth";
+import { and, eq } from "drizzle-orm";
 import { z } from "zod";
+
+import { auth } from "@/lib/auth";
 
 const transactionSchema = z.object({
   amount: z.string(),
@@ -63,10 +64,13 @@ export async function POST(req: Request) {
     });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return new Response(JSON.stringify({ error: "Invalid input", details: error.errors }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      });
+      return new Response(
+        JSON.stringify({ error: "Invalid input", details: error.errors }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        },
+      );
     }
 
     console.error("Error creating transaction:", error);
@@ -100,7 +104,12 @@ export async function PUT(req: Request) {
         date: new Date(validatedData.date),
         description: validatedData.description,
       })
-      .where(and(eq(transaction.id, parseInt(id)), eq(transaction.userId, session.user.id)))
+      .where(
+        and(
+          eq(transaction.id, parseInt(id)),
+          eq(transaction.userId, session.user.id),
+        ),
+      )
       .returning();
 
     if (updatedTransaction.length === 0) {
@@ -113,10 +122,13 @@ export async function PUT(req: Request) {
     });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return new Response(JSON.stringify({ error: "Invalid input", details: error.errors }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      });
+      return new Response(
+        JSON.stringify({ error: "Invalid input", details: error.errors }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        },
+      );
     }
 
     console.error("Error updating transaction:", error);
@@ -140,7 +152,12 @@ export async function DELETE(req: Request) {
 
     const deletedTransaction = await db
       .delete(transaction)
-      .where(and(eq(transaction.id, parseInt(id)), eq(transaction.userId, session.user.id)))
+      .where(
+        and(
+          eq(transaction.id, parseInt(id)),
+          eq(transaction.userId, session.user.id),
+        ),
+      )
       .returning();
 
     if (deletedTransaction.length === 0) {

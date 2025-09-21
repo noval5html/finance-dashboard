@@ -1,11 +1,12 @@
-import { auth } from "@/lib/auth/auth";
 import { redirect } from "next/navigation";
+
+import { auth } from "@/lib/auth/auth";
 
 export default async function ReportsPage() {
   const session = await auth.api.getSession({
     headers: {
-      cookie: ""
-    }
+      cookie: "",
+    },
   });
 
   if (!session) {
@@ -14,13 +15,15 @@ export default async function ReportsPage() {
 
   return (
     <div className="container mx-auto py-8">
-      <h1 className="text-3xl font-bold mb-6">Financial Reports</h1>
+      <h1 className="mb-6 text-3xl font-bold">Financial Reports</h1>
 
       {/* Report Filters */}
-      <div className="bg-white rounded-lg shadow p-4 mb-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="mb-6 rounded-lg bg-white p-4 shadow">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Report Type</label>
+            <label className="mb-1 block text-sm font-medium text-gray-700">
+              Report Type
+            </label>
             <select className="w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500">
               <option>Monthly Summary</option>
               <option>Yearly Summary</option>
@@ -29,7 +32,9 @@ export default async function ReportsPage() {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Period</label>
+            <label className="mb-1 block text-sm font-medium text-gray-700">
+              Period
+            </label>
             <select className="w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500">
               <option>June 2023</option>
               <option>May 2023</option>
@@ -39,7 +44,7 @@ export default async function ReportsPage() {
             </select>
           </div>
           <div className="flex items-end">
-            <button className="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg">
+            <button className="w-full rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600">
               Generate Report
             </button>
           </div>
@@ -47,9 +52,11 @@ export default async function ReportsPage() {
       </div>
 
       {/* Report Visualization */}
-      <div className="bg-white rounded-lg shadow p-6 mb-6">
-        <h2 className="text-xl font-semibold mb-4">Income vs Expenses - June 2023</h2>
-        <div className="h-64 flex items-end justify-between px-8">
+      <div className="mb-6 rounded-lg bg-white p-6 shadow">
+        <h2 className="mb-4 text-xl font-semibold">
+          Income vs Expenses - June 2023
+        </h2>
+        <div className="flex h-64 items-end justify-between px-8">
           {/* Chart visualization */}
           <div className="flex flex-col items-center">
             <div className="w-16 bg-green-500" style={{ height: "80%" }}></div>
@@ -70,9 +77,9 @@ export default async function ReportsPage() {
       </div>
 
       {/* Category Breakdown */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold mb-4">Expense by Category</h2>
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <div className="rounded-lg bg-white p-6 shadow">
+          <h2 className="mb-4 text-xl font-semibold">Expense by Category</h2>
           <ul className="space-y-3">
             <li className="flex justify-between">
               <span>Housing</span>
@@ -97,20 +104,26 @@ export default async function ReportsPage() {
           </ul>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold mb-4">Export Options</h2>
+        <div className="rounded-lg bg-white p-6 shadow">
+          <h2 className="mb-4 text-xl font-semibold">Export Options</h2>
           <div className="space-y-4">
-            <button className="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-3 rounded-lg flex items-center justify-between">
+            <button className="flex w-full items-center justify-between rounded-lg bg-gray-100 px-4 py-3 text-gray-800 hover:bg-gray-200">
               <span>Export as PDF</span>
-              <span className="bg-gray-200 rounded-full px-3 py-1 text-sm">Download</span>
+              <span className="rounded-full bg-gray-200 px-3 py-1 text-sm">
+                Download
+              </span>
             </button>
-            <button className="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-3 rounded-lg flex items-center justify-between">
+            <button className="flex w-full items-center justify-between rounded-lg bg-gray-100 px-4 py-3 text-gray-800 hover:bg-gray-200">
               <span>Export as CSV</span>
-              <span className="bg-gray-200 rounded-full px-3 py-1 text-sm">Download</span>
+              <span className="rounded-full bg-gray-200 px-3 py-1 text-sm">
+                Download
+              </span>
             </button>
-            <button className="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-3 rounded-lg flex items-center justify-between">
+            <button className="flex w-full items-center justify-between rounded-lg bg-gray-100 px-4 py-3 text-gray-800 hover:bg-gray-200">
               <span>Export as Excel</span>
-              <span className="bg-gray-200 rounded-full px-3 py-1 text-sm">Download</span>
+              <span className="rounded-full bg-gray-200 px-3 py-1 text-sm">
+                Download
+              </span>
             </button>
           </div>
         </div>

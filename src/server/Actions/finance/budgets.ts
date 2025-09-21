@@ -1,8 +1,9 @@
 import { db } from "@/server/db";
 import { budget } from "@/server/db/schemas";
-import { eq, and } from "drizzle-orm";
-import { auth } from "@/lib/auth";
+import { and, eq } from "drizzle-orm";
 import { z } from "zod";
+
+import { auth } from "@/lib/auth";
 
 const budgetSchema = z.object({
   category: z.string().min(1),
@@ -59,10 +60,13 @@ export async function POST(req: Request) {
     });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return new Response(JSON.stringify({ error: "Invalid input", details: error.errors }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      });
+      return new Response(
+        JSON.stringify({ error: "Invalid input", details: error.errors }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        },
+      );
     }
 
     console.error("Error creating budget:", error);
@@ -94,7 +98,9 @@ export async function PUT(req: Request) {
         limitAmount: validatedData.limitAmount,
         period: validatedData.period,
       })
-      .where(and(eq(budget.id, parseInt(id)), eq(budget.userId, session.user.id)))
+      .where(
+        and(eq(budget.id, parseInt(id)), eq(budget.userId, session.user.id)),
+      )
       .returning();
 
     if (updatedBudget.length === 0) {
@@ -107,10 +113,13 @@ export async function PUT(req: Request) {
     });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return new Response(JSON.stringify({ error: "Invalid input", details: error.errors }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      });
+      return new Response(
+        JSON.stringify({ error: "Invalid input", details: error.errors }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        },
+      );
     }
 
     console.error("Error updating budget:", error);
@@ -134,7 +143,9 @@ export async function DELETE(req: Request) {
 
     const deletedBudget = await db
       .delete(budget)
-      .where(and(eq(budget.id, parseInt(id)), eq(budget.userId, session.user.id)))
+      .where(
+        and(eq(budget.id, parseInt(id)), eq(budget.userId, session.user.id)),
+      )
       .returning();
 
     if (deletedBudget.length === 0) {

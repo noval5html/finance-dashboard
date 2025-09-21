@@ -93,12 +93,8 @@
           "name": "account_user_id_user_id_fk",
           "tableFrom": "account",
           "tableTo": "user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -174,12 +170,8 @@
           "name": "session_user_id_user_id_fk",
           "tableFrom": "session",
           "tableTo": "user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -189,9 +181,7 @@
         "session_token_unique": {
           "name": "session_token_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "token"
-          ]
+          "columns": ["token"]
         }
       },
       "policies": {},
@@ -278,9 +268,7 @@
         "user_email_unique": {
           "name": "user_email_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "email"
-          ]
+          "columns": ["email"]
         }
       },
       "policies": {},
@@ -397,12 +385,8 @@
           "name": "assets_user_id_user_id_fk",
           "tableFrom": "assets",
           "tableTo": "user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -461,12 +445,8 @@
           "name": "budgets_user_id_user_id_fk",
           "tableFrom": "budgets",
           "tableTo": "user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -538,12 +518,8 @@
           "name": "investments_user_id_user_id_fk",
           "tableFrom": "investments",
           "tableTo": "user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -615,12 +591,8 @@
           "name": "transactions_user_id_user_id_fk",
           "tableFrom": "transactions",
           "tableTo": "user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -636,40 +608,22 @@
     "public.Role": {
       "name": "Role",
       "schema": "public",
-      "values": [
-        "user",
-        "admin",
-        "superAdmin"
-      ]
+      "values": ["user", "admin", "superAdmin"]
     },
     "public.asset_type": {
       "name": "asset_type",
       "schema": "public",
-      "values": [
-        "property",
-        "vehicle",
-        "investment",
-        "other"
-      ]
+      "values": ["property", "vehicle", "investment", "other"]
     },
     "public.investment_type": {
       "name": "investment_type",
       "schema": "public",
-      "values": [
-        "stock",
-        "mutual_fund",
-        "crypto",
-        "bond",
-        "other"
-      ]
+      "values": ["stock", "mutual_fund", "crypto", "bond", "other"]
     },
     "public.transaction_type": {
       "name": "transaction_type",
       "schema": "public",
-      "values": [
-        "income",
-        "expense"
-      ]
+      "values": ["income", "expense"]
     }
   },
   "schemas": {},

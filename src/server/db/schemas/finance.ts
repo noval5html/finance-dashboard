@@ -1,11 +1,34 @@
-import { pgTable, serial, text, integer, timestamp, numeric, pgEnum as createPgEnum } from "drizzle-orm/pg-core";
-import { user } from "./auth";
 import { relations } from "drizzle-orm";
+import {
+  pgEnum as createPgEnum,
+  integer,
+  numeric,
+  pgTable,
+  serial,
+  text,
+  timestamp,
+} from "drizzle-orm/pg-core";
+
+import { user } from "./auth";
 
 // Enums
-export const transactionTypeEnum = createPgEnum("transaction_type", ["income", "expense"]);
-export const assetTypeEnum = createPgEnum("asset_type", ["property", "vehicle", "investment", "other"]);
-export const investmentTypeEnum = createPgEnum("investment_type", ["stock", "mutual_fund", "crypto", "bond", "other"]);
+export const transactionTypeEnum = createPgEnum("transaction_type", [
+  "income",
+  "expense",
+]);
+export const assetTypeEnum = createPgEnum("asset_type", [
+  "property",
+  "vehicle",
+  "investment",
+  "other",
+]);
+export const investmentTypeEnum = createPgEnum("investment_type", [
+  "stock",
+  "mutual_fund",
+  "crypto",
+  "bond",
+  "other",
+]);
 
 // Transactions table
 export const transaction = pgTable("transactions", {
